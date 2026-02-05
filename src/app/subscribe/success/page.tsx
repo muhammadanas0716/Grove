@@ -1,11 +1,66 @@
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
+import { ConvexHttpClient } from "convex/browser";
+import { api } from "convex/_generated/api";
+import { Polar } from "@polar-sh/sdk";
 
-export default async function SubscribeSuccessPage() {
+export const runtime = "nodejs";
+
+type SuccessPageProps = {
+  searchParams?: {
+    checkoutId?: string;
+  };
+};
+
+async function syncSubscriptionFromCheckout(
+  checkoutId: string,
+  userId: string,
+) {
+  const accessToken = process.env.POLAR_ACCESS_TOKEN;
+  const convexUrl = process.env.NEXT_PUBLIC_CONVEX_URL;
+  if (!accessToken || !convexUrl) {
+    return;
+  }
+
+  const polar = new Polar({
+    accessToken,
+    server: (process.env.POLAR_SERVER as "sandbox" | "production") || "sandbox",
+  });
+
+  const checkout = await polar.checkouts.get({ id: checkoutId });
+  if (checkout.status !== "succeeded") {
+    return;
+  }
+
+  if (!checkout.customerId || !checkout.subscriptionId) {
+    return;
+  }
+
+  const convex = new ConvexHttpClient(convexUrl);
+  await convex.mutation(api.subscriptions.updateSubscription, {
+    userId: userId as any,
+    subscriptionStatus: "active",
+    polarCustomerId: checkout.customerId,
+    subscriptionId: checkout.subscriptionId,
+  });
+}
+
+export default async function SubscribeSuccessPage({
+  searchParams,
+}: SuccessPageProps) {
   const session = await auth();
 
   if (!session) {
     redirect("/auth/signin");
+  }
+
+  const checkoutId = searchParams?.checkoutId;
+  if (checkoutId && session.user?.id) {
+    try {
+      await syncSubscriptionFromCheckout(checkoutId, session.user.id);
+    } catch (error) {
+      console.error("Failed to sync subscription from checkout:", error);
+    }
   }
 
   return (
