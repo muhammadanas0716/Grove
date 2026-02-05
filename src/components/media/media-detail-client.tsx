@@ -210,7 +210,7 @@ export default function MediaDetailClient({
         </div>
 
         <div className="mt-6 grid gap-8 lg:grid-cols-[1.3fr_1fr]">
-          <section>
+          <section className="rounded-[28px] border border-[var(--border)] bg-[rgba(14,18,12,0.25)] p-5">
             <h1
               className="text-[clamp(28px,3vw,44px)]"
               style={{ fontFamily: "var(--font-display), serif" }}
@@ -221,7 +221,7 @@ export default function MediaDetailClient({
               {formatBytes(media.size)} · {new Date(media.createdAt).toLocaleDateString("en-US", { month: "short", day: "numeric" })}
             </p>
 
-            <div className="mt-5 border border-[var(--border)] bg-[#0B120A]">
+            <div className="mt-5 overflow-hidden rounded-2xl border border-[var(--border)] bg-[#0B120A]">
               {media.url ? (
                 isVideo ? (
                   <video
@@ -244,12 +244,12 @@ export default function MediaDetailClient({
             </div>
 
             {isVideo && (
-              <div className="mt-4 border border-[var(--border)] p-4">
+              <div className="mt-4 rounded-2xl border border-[var(--border)] bg-[rgba(14,18,12,0.35)] p-4">
                 <div className="flex flex-wrap items-center gap-3">
                   <button
                     type="button"
                     onClick={togglePlay}
-                    className="bg-[var(--accent)] px-4 py-2 text-xs text-[var(--background)]"
+                    className="rounded-full bg-[var(--accent)] px-4 py-2 text-xs text-[var(--background)]"
                     style={{ fontFamily: "var(--font-mono), monospace" }}
                   >
                     {isPlaying ? "Pause" : "Play"}
@@ -257,7 +257,7 @@ export default function MediaDetailClient({
                   <button
                     type="button"
                     onClick={toggleMute}
-                    className="border border-[var(--border)] px-4 py-2 text-xs text-[var(--muted)] transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
+                    className="rounded-full border border-[var(--border)] px-4 py-2 text-xs text-[var(--muted)] transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
                     style={{ fontFamily: "var(--font-mono), monospace" }}
                   >
                     {isMuted ? "Unmute" : "Mute"}
@@ -279,7 +279,7 @@ export default function MediaDetailClient({
             )}
           </section>
 
-          <section className="border border-[var(--border)] p-4">
+          <section className="rounded-[28px] border border-[var(--border)] bg-[rgba(14,18,12,0.25)] p-5">
             <h2 className="text-xl" style={{ fontFamily: "var(--font-display), serif" }}>
               Notes
             </h2>
@@ -303,13 +303,13 @@ export default function MediaDetailClient({
                         setNoteDraft((prev) => ({ ...prev, timestamp: event.target.value }))
                       }
                       placeholder="01:24"
-                      className="h-10 w-full border border-[var(--border)] bg-transparent px-3 text-sm text-[var(--foreground)] placeholder:text-[var(--muted)] focus:border-[var(--accent)] focus:outline-none"
+                      className="h-10 w-full rounded-2xl border border-[var(--border)] bg-transparent px-3 text-sm text-[var(--foreground)] placeholder:text-[var(--muted)] focus:border-[var(--accent)] focus:outline-none"
                       style={{ fontFamily: "var(--font-mono), monospace" }}
                     />
                     <button
                       type="button"
                       onClick={handleUseCurrent}
-                      className="border border-[var(--border)] px-3 py-2 text-xs text-[var(--muted)] transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
+                      className="rounded-full border border-[var(--border)] px-3 py-2 text-xs text-[var(--muted)] transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
                       style={{ fontFamily: "var(--font-mono), monospace" }}
                     >
                       Use current
@@ -325,7 +325,7 @@ export default function MediaDetailClient({
                   value={noteDraft.body}
                   onChange={(event) => setNoteDraft((prev) => ({ ...prev, body: event.target.value }))}
                   placeholder="Add your feedback here…"
-                  className="mt-2 min-h-[120px] w-full border border-[var(--border)] bg-transparent px-3 py-3 text-sm text-[var(--foreground)] placeholder:text-[var(--muted)] focus:border-[var(--accent)] focus:outline-none"
+                  className="mt-2 min-h-[120px] w-full rounded-2xl border border-[var(--border)] bg-transparent px-3 py-3 text-sm text-[var(--foreground)] placeholder:text-[var(--muted)] focus:border-[var(--accent)] focus:outline-none"
                   style={{ fontFamily: "var(--font-mono), monospace" }}
                 />
               </div>
@@ -337,7 +337,7 @@ export default function MediaDetailClient({
               <button
                 type="submit"
                 disabled={saving}
-                className="bg-[var(--accent)] px-5 py-2 text-sm text-[var(--background)] transition hover:bg-[var(--accent-hover)] disabled:opacity-60"
+                className="rounded-full bg-[var(--accent)] px-5 py-2 text-sm text-[var(--background)] transition hover:bg-[var(--accent-hover)] disabled:opacity-60"
                 style={{ fontFamily: "var(--font-mono), monospace" }}
               >
                 {saving ? "Saving…" : "Add note"}
@@ -351,7 +351,10 @@ export default function MediaDetailClient({
                 </p>
               )}
               {sortedNotes.map((note) => (
-                <div key={note._id} className="border border-[var(--border)] p-3">
+                <div
+                  key={note._id}
+                  className="rounded-2xl border border-[var(--border)] bg-[rgba(14,18,12,0.25)] p-4 transition hover:border-[var(--accent)]"
+                >
                   <div className="flex items-center justify-between gap-3">
                     <span className="text-xs text-[var(--muted)]" style={{ fontFamily: "var(--font-mono), monospace" }}>
                       {note.timestamp !== null && isVideo
@@ -372,7 +375,7 @@ export default function MediaDetailClient({
                     <button
                       type="button"
                       onClick={() => handleSeek(note.timestamp ?? 0)}
-                      className="mt-3 text-xs text-[var(--accent)]"
+                      className="mt-3 inline-flex items-center rounded-full border border-[var(--border)] px-3 py-1 text-xs text-[var(--accent)] transition hover:border-[var(--accent)]"
                       style={{ fontFamily: "var(--font-mono), monospace" }}
                     >
                       Jump to time

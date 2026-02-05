@@ -153,7 +153,7 @@ export default function ProjectDetailClient({ userId, projectId }: ProjectDetail
           </span>
         </div>
 
-        <section className="mt-6 border border-[var(--border)] p-6">
+        <section className="mt-6 rounded-[28px] border border-[var(--border)] bg-[rgba(14,18,12,0.25)] p-6">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div>
               <p className="text-sm text-[var(--muted)]" style={{ fontFamily: "var(--font-mono), monospace" }}>
@@ -175,7 +175,7 @@ export default function ProjectDetailClient({ userId, projectId }: ProjectDetail
 
           {role === "owner" &&
             (shareUrl ? (
-              <div className="mt-5 border border-[var(--border)] p-4">
+              <div className="mt-5 rounded-2xl border border-[var(--border)] bg-[rgba(14,18,12,0.35)] p-4">
                 <p className="text-xs text-[var(--muted)]" style={{ fontFamily: "var(--font-mono), monospace" }}>
                   Share link (view + notes only)
                 </p>
@@ -191,7 +191,7 @@ export default function ProjectDetailClient({ userId, projectId }: ProjectDetail
                       setShareCopied(true);
                       setTimeout(() => setShareCopied(false), 2000);
                     }}
-                    className="border border-[var(--border)] px-3 py-2 text-xs text-[var(--muted)] transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
+                    className="rounded-full border border-[var(--border)] px-3 py-2 text-xs text-[var(--muted)] transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
                     style={{ fontFamily: "var(--font-mono), monospace" }}
                   >
                     {shareCopied ? "Copied" : "Copy link"}
@@ -199,7 +199,7 @@ export default function ProjectDetailClient({ userId, projectId }: ProjectDetail
                 </div>
               </div>
             ) : (
-              <div className="mt-5 border border-[var(--border)] p-4">
+              <div className="mt-5 rounded-2xl border border-[var(--border)] bg-[rgba(14,18,12,0.35)] p-4">
                 <p className="text-xs text-[var(--muted)]" style={{ fontFamily: "var(--font-mono), monospace" }}>
                   Generate a share link for collaborators.
                 </p>
@@ -224,7 +224,7 @@ export default function ProjectDetailClient({ userId, projectId }: ProjectDetail
                         setShareError(message);
                       }
                     }}
-                    className="border border-[var(--border)] px-3 py-2 text-xs text-[var(--muted)] transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
+                    className="rounded-full border border-[var(--border)] px-3 py-2 text-xs text-[var(--muted)] transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
                     style={{ fontFamily: "var(--font-mono), monospace" }}
                   >
                     Generate link
@@ -300,8 +300,8 @@ function UploadZone({ title, description, hint, kind, onFiles, disabled, inputRe
 
   return (
     <div
-      className={`border border-[var(--border)] p-5 transition ${
-        dragging ? "border-[var(--accent)]" : "hover:border-[var(--accent)]"
+      className={`rounded-[28px] border border-dashed border-[var(--border)] bg-[rgba(14,18,12,0.25)] p-6 transition-all ${
+        dragging ? "border-[var(--accent)] bg-[rgba(120,185,119,0.08)]" : "hover:border-[var(--accent)]"
       } ${disabled ? "opacity-60" : ""}`}
       onDragOver={(event) => {
         event.preventDefault();
@@ -322,7 +322,7 @@ function UploadZone({ title, description, hint, kind, onFiles, disabled, inputRe
             {hint}
           </p>
         </div>
-        <div className="h-10 w-10 border border-[var(--border)] flex items-center justify-center text-[var(--accent)]">
+        <div className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--border)] bg-[rgba(14,18,12,0.35)] text-[var(--accent)]">
           {kind === "video" ? <VideoIcon /> : <ImageIcon />}
         </div>
       </div>
@@ -332,7 +332,7 @@ function UploadZone({ title, description, hint, kind, onFiles, disabled, inputRe
           type="button"
           onClick={() => inputRef.current?.click()}
           disabled={disabled}
-          className="bg-[var(--accent)] px-3 py-2 text-sm text-[var(--background)] transition hover:bg-[var(--accent-hover)] disabled:opacity-60"
+          className="rounded-full bg-[var(--accent)] px-4 py-2 text-sm text-[var(--background)] transition hover:bg-[var(--accent-hover)] disabled:opacity-60"
           style={{ fontFamily: "var(--font-mono), monospace" }}
         >
           Add {kind === "video" ? "videos" : "photos"}
@@ -364,7 +364,7 @@ type MediaGridProps = {
 function MediaGrid({ items, kind, projectId }: MediaGridProps) {
   if (items.length === 0) {
     return (
-    <div className="border border-dashed border-[var(--border)] p-6 text-center">
+      <div className="rounded-[24px] border border-dashed border-[var(--border)] bg-[rgba(14,18,12,0.18)] p-6 text-center">
         <p className="text-sm" style={{ fontFamily: "var(--font-mono), monospace" }}>
           {kind === "video" ? "No videos yet." : "No photos yet."}
         </p>
@@ -381,9 +381,9 @@ function MediaGrid({ items, kind, projectId }: MediaGridProps) {
         <Link
           key={item._id}
           href={`/project/${projectId}/media/${item._id}`}
-          className="group block border border-[var(--border)] p-3 text-left transition hover:border-[var(--accent)]"
+          className="group block rounded-2xl border border-[var(--border)] bg-[rgba(14,18,12,0.25)] p-3 text-left transition-all hover:-translate-y-1 hover:border-[var(--accent)] hover:shadow-[0_12px_24px_rgba(0,0,0,0.18)]"
         >
-          <div className="relative overflow-hidden border border-[var(--border)] bg-[#0B120A]">
+          <div className="relative overflow-hidden rounded-2xl border border-[var(--border)] bg-[#0B120A]">
             {item.url ? (
               item.kind === "video" ? (
                 <video
@@ -407,7 +407,7 @@ function MediaGrid({ items, kind, projectId }: MediaGridProps) {
             )}
             <div className="absolute inset-0 bg-black/20" />
             <div
-              className="absolute bottom-3 left-3 border border-[var(--border)] bg-[#0D130C] px-3 py-1 text-xs"
+              className="absolute bottom-3 left-3 rounded-full border border-[var(--border)] bg-[#0D130C] px-3 py-1 text-xs"
               style={{ fontFamily: "var(--font-mono), monospace" }}
             >
               Open

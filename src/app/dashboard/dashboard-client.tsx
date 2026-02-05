@@ -176,7 +176,7 @@ export default function DashboardClient({ userId }: { userId: string }) {
         <aside
           className={`shrink-0 transition-[width] duration-300 ease-out ${
             sidebarOpen
-              ? "w-64 border-r border-[var(--border)] px-6 py-8"
+              ? "w-64 border-r border-[var(--border)] bg-[rgba(14,18,12,0.45)] px-6 py-8 rounded-r-[32px] overflow-hidden"
               : "w-0 overflow-hidden border-r-0 px-0 py-0 pointer-events-none"
           }`}
         >
@@ -202,7 +202,7 @@ export default function DashboardClient({ userId }: { userId: string }) {
               </p>
               <div className="mt-3 flex items-center gap-3">
                 <span
-                  className={`inline-flex items-center rounded-sm border px-3 py-1 text-xs ${
+                  className={`inline-flex items-center rounded-full border px-3 py-1.5 text-xs ${
                     isActive
                       ? "border-[#78B977] text-[#78B977]"
                       : isTrial
@@ -224,7 +224,7 @@ export default function DashboardClient({ userId }: { userId: string }) {
                 type="button"
                 onClick={handleSync}
                 disabled={syncing}
-                className="mt-4 w-full border border-[var(--border)] px-4 py-2 text-sm text-[var(--foreground)] transition hover:border-[var(--accent)] disabled:opacity-60"
+                className="mt-4 w-full rounded-full border border-[var(--border)] bg-[rgba(14,18,12,0.3)] px-4 py-2 text-sm text-[var(--foreground)] transition hover:border-[var(--accent)] disabled:opacity-60"
                 style={{ fontFamily: "var(--font-mono), monospace" }}
               >
                 {syncing ? "Syncing..." : "Sync subscription"}
@@ -266,7 +266,7 @@ export default function DashboardClient({ userId }: { userId: string }) {
                     type="button"
                     onClick={() => videoInputRef.current?.click()}
                     disabled={!canUpload || uploading}
-                    className="w-full border border-[var(--border)] px-3 py-2 text-sm transition hover:border-[var(--accent)] disabled:opacity-60"
+                    className="w-full rounded-full border border-[var(--border)] bg-[rgba(14,18,12,0.3)] px-3 py-2 text-sm transition hover:border-[var(--accent)] disabled:opacity-60"
                     style={{ fontFamily: "var(--font-mono), monospace" }}
                   >
                     Upload video
@@ -275,7 +275,7 @@ export default function DashboardClient({ userId }: { userId: string }) {
                     type="button"
                     onClick={() => imageInputRef.current?.click()}
                     disabled={!canUpload || uploading}
-                    className="w-full border border-[var(--border)] px-3 py-2 text-sm transition hover:border-[var(--accent)] disabled:opacity-60"
+                    className="w-full rounded-full border border-[var(--border)] bg-[rgba(14,18,12,0.3)] px-3 py-2 text-sm transition hover:border-[var(--accent)] disabled:opacity-60"
                     style={{ fontFamily: "var(--font-mono), monospace" }}
                   >
                     Upload photo
@@ -283,7 +283,7 @@ export default function DashboardClient({ userId }: { userId: string }) {
                   <button
                     type="button"
                     disabled
-                    className="w-full border border-[var(--border)] px-3 py-2 text-sm text-[var(--muted)]"
+                    className="w-full rounded-full border border-[var(--border)] bg-[rgba(14,18,12,0.3)] px-3 py-2 text-sm text-[var(--muted)]"
                     style={{ fontFamily: "var(--font-mono), monospace" }}
                   >
                     Review mode (soon)
@@ -308,7 +308,7 @@ export default function DashboardClient({ userId }: { userId: string }) {
             <button
               type="button"
               onClick={() => setSidebarOpen((prev) => !prev)}
-              className="border border-[var(--border)] px-3 py-2 text-xs text-[var(--muted)] transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
+              className="rounded-full border border-[var(--border)] bg-[rgba(14,18,12,0.3)] px-4 py-2 text-xs text-[var(--muted)] transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
               style={{ fontFamily: "var(--font-mono), monospace" }}
             >
               {sidebarOpen ? "Hide sidebar" : "Show sidebar"}
@@ -330,7 +330,7 @@ export default function DashboardClient({ userId }: { userId: string }) {
           </header>
 
           {!hasAccess && (
-            <section className="mt-8 max-w-3xl border border-[var(--border)] p-6">
+            <section className="mt-8 max-w-3xl rounded-[28px] border border-[var(--border)] bg-[rgba(14,18,12,0.25)] p-6">
               <h3
                 className="text-2xl"
                 style={{ fontFamily: "var(--font-display), serif" }}
@@ -346,14 +346,14 @@ export default function DashboardClient({ userId }: { userId: string }) {
               <div className="mt-5 flex flex-wrap gap-3">
                 <a
                   href="/subscribe"
-                  className="bg-[var(--accent)] px-5 py-2 text-sm text-[var(--background)] transition hover:bg-[var(--accent-hover)]"
+                  className="rounded-full bg-[var(--accent)] px-5 py-2 text-sm text-[var(--background)] transition hover:bg-[var(--accent-hover)]"
                   style={{ fontFamily: "var(--font-mono), monospace" }}
                 >
                   Start trial
                 </a>
                 <a
                   href="/subscribe"
-                  className="border border-[var(--border)] px-5 py-2 text-sm text-[var(--foreground)] transition hover:border-[var(--accent)]"
+                  className="rounded-full border border-[var(--border)] px-5 py-2 text-sm text-[var(--foreground)] transition hover:border-[var(--accent)]"
                   style={{ fontFamily: "var(--font-mono), monospace" }}
                 >
                   View plans
@@ -363,7 +363,7 @@ export default function DashboardClient({ userId }: { userId: string }) {
           )}
 
           {hasAccess && !projectLoaded && (
-            <section className="mt-8 max-w-3xl border border-[var(--border)] p-6">
+            <section className="mt-8 max-w-3xl rounded-[28px] border border-[var(--border)] bg-[rgba(14,18,12,0.25)] p-6">
               <p
                 className="text-sm text-[var(--muted)]"
                 style={{ fontFamily: "var(--font-mono), monospace" }}
@@ -374,7 +374,7 @@ export default function DashboardClient({ userId }: { userId: string }) {
           )}
 
           {hasAccess && projectLoaded && !project && (
-            <section className="mt-8 max-w-3xl border border-[var(--border)] p-6">
+            <section className="mt-8 max-w-3xl rounded-[28px] border border-[var(--border)] bg-[rgba(14,18,12,0.25)] p-6">
               <h3
                 className="text-2xl"
                 style={{ fontFamily: "var(--font-display), serif" }}
@@ -393,13 +393,13 @@ export default function DashboardClient({ userId }: { userId: string }) {
                   value={projectInput}
                   onChange={(event) => setProjectInput(event.target.value)}
                   placeholder="Launch teaser v1"
-                  className="h-11 border border-[var(--border)] bg-transparent px-4 text-base text-[var(--foreground)] placeholder:text-[var(--muted)] focus:border-[var(--accent)] focus:outline-none"
+                  className="h-11 rounded-full border border-[var(--border)] bg-transparent px-4 text-base text-[var(--foreground)] placeholder:text-[var(--muted)] focus:border-[var(--accent)] focus:outline-none"
                   style={{ fontFamily: "var(--font-mono), monospace" }}
                 />
                 <button
                   type="submit"
                   disabled={creatingProject}
-                  className="w-fit bg-[var(--accent)] px-5 py-2 text-sm text-[var(--background)] transition hover:bg-[var(--accent-hover)] disabled:opacity-60"
+                  className="w-fit rounded-full bg-[var(--accent)] px-5 py-2 text-sm text-[var(--background)] transition hover:bg-[var(--accent-hover)] disabled:opacity-60"
                   style={{ fontFamily: "var(--font-mono), monospace" }}
                 >
                   {creatingProject ? "Creating..." : "Create project"}
@@ -418,7 +418,7 @@ export default function DashboardClient({ userId }: { userId: string }) {
 
           {hasAccess && projectLoaded && project && (
             <div className="mt-8 space-y-8">
-              <section className="border border-[var(--border)] p-6">
+              <section className="rounded-[28px] border border-[var(--border)] bg-[rgba(14,18,12,0.25)] p-6">
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <div>
                     <p
@@ -448,7 +448,7 @@ export default function DashboardClient({ userId }: { userId: string }) {
                   Upload video or photo files. Click any thumbnail to open the viewer.
                 </p>
                 {shareUrl ? (
-                  <div className="mt-5 border border-[var(--border)] p-4">
+                  <div className="mt-5 rounded-2xl border border-[var(--border)] bg-[rgba(14,18,12,0.35)] p-4">
                     <p
                       className="text-xs text-[var(--muted)]"
                       style={{ fontFamily: "var(--font-mono), monospace" }}
@@ -470,7 +470,7 @@ export default function DashboardClient({ userId }: { userId: string }) {
                           setShareCopied(true);
                           setTimeout(() => setShareCopied(false), 2000);
                         }}
-                        className="border border-[var(--border)] px-3 py-2 text-xs text-[var(--muted)] transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
+                        className="rounded-full border border-[var(--border)] px-3 py-2 text-xs text-[var(--muted)] transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
                         style={{ fontFamily: "var(--font-mono), monospace" }}
                       >
                         {shareCopied ? "Copied" : "Copy link"}
@@ -478,7 +478,7 @@ export default function DashboardClient({ userId }: { userId: string }) {
                     </div>
                   </div>
                 ) : (
-                  <div className="mt-5 border border-[var(--border)] p-4">
+                  <div className="mt-5 rounded-2xl border border-[var(--border)] bg-[rgba(14,18,12,0.35)] p-4">
                     <p
                       className="text-xs text-[var(--muted)]"
                       style={{ fontFamily: "var(--font-mono), monospace" }}
@@ -506,7 +506,7 @@ export default function DashboardClient({ userId }: { userId: string }) {
                             setShareError(message);
                           }
                         }}
-                        className="border border-[var(--border)] px-3 py-2 text-xs text-[var(--muted)] transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
+                        className="rounded-full border border-[var(--border)] px-3 py-2 text-xs text-[var(--muted)] transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
                         style={{ fontFamily: "var(--font-mono), monospace" }}
                       >
                         Generate link
@@ -560,7 +560,7 @@ export default function DashboardClient({ userId }: { userId: string }) {
               )}
 
               <div className="flex justify-center">
-                <div className="border border-[var(--border)] px-6 py-3">
+                <div className="rounded-[28px] border border-[var(--border)] bg-[rgba(14,18,12,0.25)] px-5 py-3">
                   <div className="flex flex-wrap items-center gap-3">
                     <DockButton
                       label="Upload video"
@@ -624,8 +624,8 @@ function UploadZone({
 
   return (
     <div
-      className={`border border-[var(--border)] p-5 transition ${
-        dragging ? "border-[var(--accent)]" : "hover:border-[var(--accent)]"
+      className={`rounded-[28px] border border-dashed border-[var(--border)] bg-[rgba(14,18,12,0.25)] p-6 transition-all ${
+        dragging ? "border-[var(--accent)] bg-[rgba(120,185,119,0.08)]" : "hover:border-[var(--accent)]"
       } ${disabled ? "opacity-60" : ""}`}
       onDragOver={(event) => {
         event.preventDefault();
@@ -652,7 +652,7 @@ function UploadZone({
             {hint}
           </p>
         </div>
-        <div className="h-10 w-10 border border-[var(--border)] flex items-center justify-center text-[var(--accent)]">
+        <div className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--border)] bg-[rgba(14,18,12,0.35)] text-[var(--accent)]">
           {kind === "video" ? <VideoIcon /> : <ImageIcon />}
         </div>
       </div>
@@ -662,7 +662,7 @@ function UploadZone({
           type="button"
           onClick={() => inputRef.current?.click()}
           disabled={disabled}
-          className="bg-[var(--accent)] px-3 py-2 text-sm text-[var(--background)] transition hover:bg-[var(--accent-hover)] disabled:opacity-60"
+          className="rounded-full bg-[var(--accent)] px-4 py-2 text-sm text-[var(--background)] transition hover:bg-[var(--accent-hover)] disabled:opacity-60"
           style={{ fontFamily: "var(--font-mono), monospace" }}
         >
           Add {kind === "video" ? "videos" : "photos"}
@@ -696,7 +696,7 @@ type MediaGridProps = {
 function MediaGrid({ items, kind }: MediaGridProps) {
   if (items.length === 0) {
     return (
-      <div className="border border-dashed border-[var(--border)] p-6 text-center">
+      <div className="rounded-[24px] border border-dashed border-[var(--border)] bg-[rgba(14,18,12,0.18)] p-6 text-center">
         <p className="text-sm" style={{ fontFamily: "var(--font-mono), monospace" }}>
           {kind === "video" ? "No videos yet." : "No photos yet."}
         </p>
@@ -711,14 +711,14 @@ function MediaGrid({ items, kind }: MediaGridProps) {
   }
 
   return (
-      <div className="grid gap-4 sm:grid-cols-2">
+    <div className="grid gap-4 sm:grid-cols-2">
       {items.map((item) => (
         <Link
           key={item._id}
           href={`/dashboard/media/${item._id}`}
-          className="group block border border-[var(--border)] p-3 text-left transition hover:border-[var(--accent)]"
+          className="group block rounded-2xl border border-[var(--border)] bg-[rgba(14,18,12,0.25)] p-3 text-left transition-all hover:-translate-y-1 hover:border-[var(--accent)] hover:shadow-[0_12px_24px_rgba(0,0,0,0.18)]"
         >
-          <div className="relative overflow-hidden border border-[var(--border)] bg-[#0B120A]">
+          <div className="relative overflow-hidden rounded-2xl border border-[var(--border)] bg-[#0B120A]">
             {item.url ? (
               item.kind === "video" ? (
                 <video
@@ -742,7 +742,7 @@ function MediaGrid({ items, kind }: MediaGridProps) {
             )}
             <div className="absolute inset-0 bg-black/20" />
             <div
-              className="absolute bottom-3 left-3 border border-[var(--border)] bg-[#0D130C] px-3 py-1 text-xs"
+              className="absolute bottom-3 left-3 rounded-full border border-[var(--border)] bg-[#0D130C] px-3 py-1 text-xs"
               style={{ fontFamily: "var(--font-mono), monospace" }}
             >
               Open
@@ -779,7 +779,7 @@ function DockButton({ label, helper, disabled, onClick, children }: DockButtonPr
       type="button"
       onClick={onClick}
       disabled={disabled}
-      className="flex items-center gap-3 border border-[var(--border)] px-3 py-2 text-left transition hover:border-[var(--accent)] disabled:opacity-60"
+      className="flex items-center gap-3 rounded-full border border-[var(--border)] bg-[rgba(14,18,12,0.35)] px-4 py-2 text-left transition-all hover:-translate-y-0.5 hover:border-[var(--accent)] disabled:opacity-60"
     >
       <span className="text-[var(--accent)]">{children}</span>
       <span>
