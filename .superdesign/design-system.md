@@ -4,16 +4,16 @@
 Grove is a media review workspace for video and photo uploads. The dashboard should feel like a cinematic studio bay: warm, tactile, and focused. Users must be gated behind an active plan or trial before accessing any uploads.
 
 ## Visual direction
-- Theme: quiet studio bay, deep moss base, calm green accents.
+- Theme: quiet studio bay, espresso base, warm amber accents.
 - Atmosphere: solid fields, crisp borders, minimal ornament, spacious layout.
 - Mood keywords: studio, editorial, grounded, precise, restrained.
 
 ## Color system
-- Background: `#0D130C`
-- Foreground: `#E3ECE1`
-- Muted: `#9BA89A`
-- Border: `#2A3529`
-- Accent: `#78B977` (hover `#8BC98A`)
+- Background: `#0F0A08`
+- Foreground: `#F5E6D3`
+- Muted: `#A0866A`
+- Border: `#3A2D24`
+- Accent: `#F59E0B` (hover `#F7B547`)
 
 ## Typography
 - Display/Headings: Plus Jakarta Sans (400–600)

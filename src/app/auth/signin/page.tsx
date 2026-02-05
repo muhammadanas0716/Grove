@@ -1,10 +1,28 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 
 export default function SignInPage() {
+  return (
+    <Suspense fallback={<SignInFallback />}>
+      <SignInForm />
+    </Suspense>
+  );
+}
+
+function SignInFallback() {
+  return (
+    <div className="min-h-screen bg-[var(--background)] text-[var(--foreground)] flex items-center justify-center px-8 page-transition">
+      <p className="text-sm text-[var(--muted)]" style={{ fontFamily: "var(--font-mono), monospace" }}>
+        Loading…
+      </p>
+    </div>
+  );
+}
+
+function SignInForm() {
   const [isSignUp, setIsSignUp] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

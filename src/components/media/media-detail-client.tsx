@@ -210,7 +210,7 @@ export default function MediaDetailClient({
         </div>
 
         <div className="mt-6 grid gap-8 lg:grid-cols-[1.3fr_1fr]">
-          <section className="rounded-[28px] border border-[var(--border)] bg-[rgba(14,18,12,0.25)] p-5">
+          <section className="rounded-[28px] border border-[var(--border)] bg-[var(--surface-1)] p-5">
             <h1
               className="text-[clamp(28px,3vw,44px)]"
               style={{ fontFamily: "var(--font-display), serif" }}
@@ -221,7 +221,7 @@ export default function MediaDetailClient({
               {formatBytes(media.size)} · {new Date(media.createdAt).toLocaleDateString("en-US", { month: "short", day: "numeric" })}
             </p>
 
-            <div className="mt-5 overflow-hidden rounded-2xl border border-[var(--border)] bg-[#0B120A]">
+            <div className="mt-5 overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--background)]">
               {media.url ? (
                 isVideo ? (
                   <video
@@ -244,7 +244,7 @@ export default function MediaDetailClient({
             </div>
 
             {isVideo && (
-              <div className="mt-4 rounded-2xl border border-[var(--border)] bg-[rgba(14,18,12,0.35)] p-4">
+              <div className="mt-4 rounded-2xl border border-[var(--border)] bg-[var(--surface-2)] p-4">
                 <div className="flex flex-wrap items-center gap-3">
                   <button
                     type="button"
@@ -279,7 +279,7 @@ export default function MediaDetailClient({
             )}
           </section>
 
-          <section className="rounded-[28px] border border-[var(--border)] bg-[rgba(14,18,12,0.25)] p-5">
+          <section className="rounded-[28px] border border-[var(--border)] bg-[var(--surface-1)] p-5">
             <h2 className="text-xl" style={{ fontFamily: "var(--font-display), serif" }}>
               Notes
             </h2>
@@ -353,7 +353,7 @@ export default function MediaDetailClient({
               {sortedNotes.map((note) => (
                 <div
                   key={note._id}
-                  className="rounded-2xl border border-[var(--border)] bg-[rgba(14,18,12,0.25)] p-4 transition hover:border-[var(--accent)]"
+                  className="rounded-2xl border border-[var(--border)] bg-[var(--surface-1)] p-4 transition hover:border-[var(--accent)]"
                 >
                   <div className="flex items-center justify-between gap-3">
                     <span className="text-xs text-[var(--muted)]" style={{ fontFamily: "var(--font-mono), monospace" }}>
