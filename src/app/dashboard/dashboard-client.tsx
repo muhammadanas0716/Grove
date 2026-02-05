@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { useQuery } from "convex/react";
 import { api } from "convex/_generated/api";
 import { ThemeToggle } from "@/components/theme-toggle";
@@ -11,6 +12,27 @@ export default function DashboardClient({ userId }: { userId: string }) {
 
   const status = subscription?.subscriptionStatus || "inactive";
   const isActive = status === "active";
+  const [syncing, setSyncing] = useState(false);
+  const [syncMessage, setSyncMessage] = useState<string | null>(null);
+
+  const handleSync = async () => {
+    setSyncing(true);
+    setSyncMessage(null);
+    try {
+      const response = await fetch("/api/polar/sync", { method: "POST" });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to sync subscription");
+      }
+      setSyncMessage("Subscription synced from Polar.");
+    } catch (error) {
+      const message =
+        error instanceof Error ? error.message : "Failed to sync subscription";
+      setSyncMessage(message);
+    } finally {
+      setSyncing(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-[var(--background)] text-[var(--foreground)] page-transition">
@@ -61,6 +83,23 @@ export default function DashboardClient({ userId }: { userId: string }) {
                     {status}
                   </p>
                 </div>
+              </div>
+
+              <div className="mt-6 flex items-center gap-4">
+                <button
+                  type="button"
+                  onClick={handleSync}
+                  disabled={syncing}
+                  className="inline-flex items-center justify-center bg-[var(--accent)] text-[var(--background)] px-5 py-2 text-sm font-medium tracking-tight hover:bg-[var(--accent-hover)] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+                  style={{ fontFamily: 'var(--font-mono), monospace' }}
+                >
+                  {syncing ? "Syncing..." : "Sync Now"}
+                </button>
+                {syncMessage && (
+                  <span className="text-sm text-[var(--muted)]" style={{ fontFamily: 'var(--font-mono), monospace' }}>
+                    {syncMessage}
+                  </span>
+                )}
               </div>
             </div>
 
