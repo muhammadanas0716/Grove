@@ -1,4 +1,4 @@
-# Setup Guide
+# Setup Guide (Self‑Hosted / OSS)
 
 ## Environment Variables
 
@@ -16,13 +16,13 @@ This will:
 - Generate `NEXT_PUBLIC_CONVEX_URL` and `CONVEX_DEPLOYMENT`
 - Add them to your `.env.local`
 
-3. Generate AUTH_SECRET:
+3. Generate `AUTH_SECRET`:
 ```bash
 openssl rand -base64 32
 ```
 Add the output to `.env.local` as `AUTH_SECRET=...`
 
-4. Set up Polar.sh:
+4. (Optional) Set up Polar.sh for billing:
 - Go to [Polar.sh Dashboard](https://polar.sh)
 - Create a product with price $4.67/month
 - Get your Access Token from Settings → API
@@ -37,7 +37,7 @@ Add the output to `.env.local` as `AUTH_SECRET=...`
   - `POLAR_RETURN_URL=http://localhost:4000/subscribe` (or your production URL)
   - `NEXT_PUBLIC_APP_URL=http://localhost:4000` (or your production URL)
 
-5. Configure Polar.sh Webhook:
+5. (Optional) Configure Polar.sh Webhook:
 - In Polar.sh Dashboard → Settings → Webhooks
 - Add webhook URL: `https://your-domain.com/api/polar/webhook`
 - Select events: `subscription.created`, `subscription.updated`, `subscription.canceled`, `checkout.updated`
@@ -76,3 +76,9 @@ npm run convex:deploy
    - `POLAR_RETURN_URL` (optional if you rely on request origin)
    - `NEXT_PUBLIC_APP_URL` (optional if you rely on request origin)
 4. Update Polar.sh webhook URL to your production URL
+
+## OSS mode without Polar
+If you’re running locally and **not** using Polar:
+1. Create an account in the app.
+2. Open the Convex dashboard and update your user record.
+3. Set `subscriptionStatus` to `active` or `trialing`.
