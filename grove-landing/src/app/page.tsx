@@ -64,6 +64,41 @@ export default function Home() {
             <p className="text-[#A0866A] text-xs">Figma, PNG, PDF</p>
           </div>
         </div>
+
+        <footer
+          className="mt-14 border-t border-[#3A2D24] pt-6 text-xs text-[#A0866A]"
+          style={{ fontFamily: 'var(--font-mono), monospace' }}
+        >
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <div className="flex flex-wrap items-center gap-4">
+              <a href="/docs" className="hover:text-[#F5E6D3] transition-colors">
+                Docs
+              </a>
+              <a href="/terms" className="hover:text-[#F5E6D3] transition-colors">
+                Terms
+              </a>
+              <a href="/privacy" className="hover:text-[#F5E6D3] transition-colors">
+                Privacy
+              </a>
+              <a
+                href="https://github.com/muhammadanas0716/Grove"
+                target="_blank"
+                rel="noreferrer"
+                className="hover:text-[#F5E6D3] transition-colors"
+              >
+                OSS Repo
+              </a>
+            </div>
+            <a
+              href="https://x.com/MuhammadAnas707"
+              target="_blank"
+              rel="noreferrer"
+              className="hover:text-[#F5E6D3] transition-colors"
+            >
+              X: @MuhammadAnas707
+            </a>
+          </div>
+        </footer>
       </main>
     </div>
   );

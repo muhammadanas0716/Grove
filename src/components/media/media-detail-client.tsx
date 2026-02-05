@@ -81,6 +81,7 @@ export default function MediaDetailClient({
   const addNote = useMutation(api.notes.addNote);
 
   const videoRef = useRef<HTMLVideoElement>(null);
+  const playPromiseRef = useRef<Promise<void> | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
@@ -118,7 +119,16 @@ export default function MediaDetailClient({
     const video = videoRef.current;
     if (!video) return;
     if (video.paused) {
-      void video.play();
+      const playPromise = video.play();
+      if (playPromise) {
+        playPromiseRef.current = playPromise;
+        playPromise.catch((error) => {
+          if (error?.name !== "AbortError") {
+            // Ignore play/pause race, surface unexpected failures.
+            console.error(error);
+          }
+        });
+      }
     } else {
       video.pause();
     }

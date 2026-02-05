@@ -1,4 +1,5 @@
 import { ThemeToggle } from "@/components/theme-toggle";
+import { SiteFooter } from "@/components/site-footer";
 
 export default function Home() {
   return (
@@ -69,6 +70,8 @@ export default function Home() {
             <p className="text-[var(--muted)] text-sm">Not expensive</p>
           </div>
         </div>
+
+        <SiteFooter />
       </main>
     </div>
   );

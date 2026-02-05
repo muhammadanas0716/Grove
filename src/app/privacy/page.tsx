@@ -1,4 +1,5 @@
 import { ThemeToggle } from "@/components/theme-toggle";
+import { SiteFooter } from "@/components/site-footer";
 
 export default function PrivacyPage() {
   return (
@@ -53,6 +54,8 @@ export default function PrivacyPage() {
             </p>
           </div>
         </div>
+
+        <SiteFooter />
       </main>
     </div>
   );

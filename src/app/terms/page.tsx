@@ -1,4 +1,5 @@
 import { ThemeToggle } from "@/components/theme-toggle";
+import { SiteFooter } from "@/components/site-footer";
 
 export default function TermsPage() {
   return (
@@ -62,6 +63,8 @@ export default function TermsPage() {
             </p>
           </div>
         </div>
+
+        <SiteFooter />
       </main>
     </div>
   );

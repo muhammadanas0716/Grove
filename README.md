@@ -1,5 +1,7 @@
 # grove
 
+![grove preview](public/image.png)
+
 Open‑source media review workspace for video + photo feedback. Upload assets, share a link, and leave timestamped notes.
 
 ## Features
