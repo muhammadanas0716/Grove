@@ -8,8 +8,12 @@
  * @module
  */
 
+import type * as access from "../access.js";
 import type * as auth from "../auth.js";
+import type * as media from "../media.js";
 import type * as migrations from "../migrations.js";
+import type * as notes from "../notes.js";
+import type * as projects from "../projects.js";
 import type * as subscriptions from "../subscriptions.js";
 
 import type {
@@ -19,8 +23,12 @@ import type {
 } from "convex/server";
 
 declare const fullApi: ApiFromModules<{
+  access: typeof access;
   auth: typeof auth;
+  media: typeof media;
   migrations: typeof migrations;
+  notes: typeof notes;
+  projects: typeof projects;
   subscriptions: typeof subscriptions;
 }>;
 

@@ -7,9 +7,9 @@ import { Polar } from "@polar-sh/sdk";
 export const runtime = "nodejs";
 
 type SuccessPageProps = {
-  searchParams?: {
+  searchParams?: Promise<{
     checkoutId?: string;
-  };
+  }>;
 };
 
 async function syncSubscriptionFromCheckout(
@@ -36,10 +36,20 @@ async function syncSubscriptionFromCheckout(
     return;
   }
 
+  let subscriptionStatus = "active";
+  try {
+    const subscription = await polar.subscriptions.get({
+      id: checkout.subscriptionId,
+    });
+    subscriptionStatus = subscription.status;
+  } catch (error) {
+    console.error("Failed to load Polar subscription:", error);
+  }
+
   const convex = new ConvexHttpClient(convexUrl);
   await convex.mutation(api.subscriptions.updateSubscription, {
     userId: userId as any,
-    subscriptionStatus: "active",
+    subscriptionStatus,
     polarCustomerId: checkout.customerId,
     subscriptionId: checkout.subscriptionId,
   });
@@ -54,7 +64,8 @@ export default async function SubscribeSuccessPage({
     redirect("/auth/signin");
   }
 
-  const checkoutId = searchParams?.checkoutId;
+  const resolvedSearchParams = searchParams ? await searchParams : undefined;
+  const checkoutId = resolvedSearchParams?.checkoutId;
   if (checkoutId && session.user?.id) {
     try {
       await syncSubscriptionFromCheckout(checkoutId, session.user.id);

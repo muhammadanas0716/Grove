@@ -47,4 +47,50 @@ export default defineSchema({
     expires: v.number(),
   })
     .index("by_token", ["token"]),
+
+  projects: defineTable({
+    ownerId: v.id("users"),
+    name: v.string(),
+    inviteToken: v.optional(v.string()),
+    createdAt: v.number(),
+    updatedAt: v.number(),
+  })
+    .index("by_owner", ["ownerId"])
+    .index("by_owner_created", ["ownerId", "createdAt"])
+    .index("by_invite_token", ["inviteToken"]),
+
+  projectMembers: defineTable({
+    projectId: v.id("projects"),
+    userId: v.id("users"),
+    role: v.union(v.literal("owner"), v.literal("collaborator")),
+    createdAt: v.number(),
+  })
+    .index("by_project", ["projectId"])
+    .index("by_user", ["userId"])
+    .index("by_user_project", ["userId", "projectId"]),
+
+  media: defineTable({
+    ownerId: v.id("users"),
+    projectId: v.id("projects"),
+    kind: v.union(v.literal("video"), v.literal("image")),
+    storageId: v.id("_storage"),
+    name: v.string(),
+    size: v.number(),
+    mimeType: v.union(v.string(), v.null()),
+    createdAt: v.number(),
+  })
+    .index("by_project", ["projectId"])
+    .index("by_project_created", ["projectId", "createdAt"])
+    .index("by_owner", ["ownerId"]),
+
+  notes: defineTable({
+    mediaId: v.id("media"),
+    authorId: v.id("users"),
+    body: v.string(),
+    timestamp: v.union(v.number(), v.null()),
+    createdAt: v.number(),
+  })
+    .index("by_media", ["mediaId"])
+    .index("by_media_created", ["mediaId", "createdAt"])
+    .index("by_author", ["authorId"]),
 });
