@@ -1,4 +1,4 @@
-# grove
+# grove (prod site still has some bugs, fixing)
 
 ![grove preview](public/image.png)
 
